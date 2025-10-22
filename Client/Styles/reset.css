@@ -1,0 +1,18 @@
+*, *::before, *::after {
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+
+    font-family: var(--font-family-normal);
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--font-line-height-normal);
+    color: var(--font-color-primary);
+    background-color: var(--theme-background-color);
+
+}

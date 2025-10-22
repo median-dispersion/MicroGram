@@ -1,0 +1,29 @@
+:root {
+
+    --content-width-maximum: 800px;
+
+    --whitespace-large: 24px;
+    --whitespace-normal: 16px;
+    --whitespace-small: 8px;
+
+    --outline-normal: 2px solid;
+    --outline-offset-normal: -2px;
+
+    --border-radius-large: 16px;
+    --border-radius-normal: 8px;
+    --border-radius-small: 4px;
+
+    --font-family-normal: Arial, Helvetica, sans-serif;
+    --font-size-large: 20px;
+    --font-size-normal: 16px;
+    --font-size-small: 14px;
+    --font-weight-bold: bold;
+    --font-weight-normal: normal;
+    --font-weight-light: lighter;
+    --font-line-height-normal: 1.5;
+
+    --transition-time-slow: 200ms;
+    --transition-time-normal: 100ms;
+    --transition-time-fast: 50ms;
+
+}
