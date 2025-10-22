@@ -26,4 +26,6 @@
     --transition-time-normal: 100ms;
     --transition-time-fast: 50ms;
 
+    --header-z-index: 100;
+
 }
