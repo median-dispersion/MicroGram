@@ -37,15 +37,268 @@
 
 }
 
-.card__item:first-child {
+.card__item:last-child {
 
     border-bottom-left-radius: var(--border-radius-large);
     border-bottom-right-radius: var(--border-radius-large);
 
 }
 
+.card__item:has(.card__content--interactive:hover) {
+
+    background-color: var(--theme-foreground-color-hover);
+
+}
+
+.card__item:has(.card__content--interactive:focus-within) {
+
+    outline-color: var(--outline-color-normal);
+
+}
+
 .card__item--disabled {
 
     display: none;
+
+}
+
+.card__content {
+
+    display: flex;
+    align-items: center;
+    gap: var(--whitespace-normal);
+    flex-grow: 1;
+    height: 100%;
+    min-height: 48px;
+
+}
+
+.card__content:focus {
+
+    outline: none;
+
+}
+
+.card__content--interactive {
+
+    cursor: pointer;
+
+}
+
+.card__icon {
+
+    flex-shrink: 0;
+
+}
+
+.card__button {
+
+    flex-shrink: 0;
+
+}
+
+.card__details {
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+}
+
+.card__state {
+
+    flex-shrink: 0;
+    position: relative;
+
+}
+
+.card__state--toggle {
+
+    width: 40px;
+    height: 26px;
+    border-radius: 26px;
+    background-color: var(--toggle-background-color-unchecked);
+    transition: var(--transition-time-slow);
+
+}
+
+.card__state--toggle:has(.card__input:checked) {
+
+    background-color: var(--toggle-background-color-checked);
+
+}
+
+.card__state--toggle::before {
+
+    content: "";
+    position: absolute;
+    height: calc(100% - 8px);
+    aspect-ratio: 1;
+    inset: 4px;
+    border-radius: 100%;
+    background-color: var(--toggle-foreground-color-unchecked);
+    transition: var(--transition-time-slow);
+
+}
+
+
+.card__state--toggle:has(.card__input:checked)::before {
+
+    transform: translateX(calc(100% - 4px));
+
+}
+
+.card__state--radio {
+
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--radio-border-color-unchecked);
+    border-radius: 20px;
+    background-color: var(--radio-background-color-unchecked);
+    transition: var(--transition-time-slow);
+
+}
+
+.card__state--radio:has(.card__input:checked) {
+
+    border-color: var(--radio-border-color-checked);
+    background-color: var(--radio-background-color-checked);
+
+}
+
+.card__state--radio::before {
+
+    content: "";
+    position: absolute;
+    height: calc(100% - 4px);
+    aspect-ratio: 1;
+    inset: 2px;
+    border-radius: 100%;
+    background-color: var(--radio-foreground-color-unchecked);
+    transition: var(--transition-time-slow);
+
+}
+
+.card__state--radio:has(.card__input:checked)::before {
+
+    background-color: var(--radio-foreground-color-checked);
+
+}
+
+.card__state--checkbox {
+
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--checkbox-border-color-unchecked);
+    border-radius: var(--border-radius-small);
+    background-color: var(--checkbox-background-color-unchecked);
+    transition: var(--transition-time-normal);
+
+}
+
+.card__state--checkbox:has(.card__input:checked) {
+
+    border-color: var(--checkbox-border-color-checked);
+    background-color: var(--checkbox-background-color-checked);
+
+}
+
+.card__state--checkbox::before {
+
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    inset: 0;
+    left: 5px;
+    top: 1px;
+    border: solid var(--checkbox-foreground-color-unchecked);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    transition: var(--transition-time-normal);
+
+}
+
+.card__state--checkbox:has(.card__input:checked)::before {
+
+    border-color: var(--checkbox-foreground-color-checked);
+
+}
+
+.card__label {
+
+    font-size: var(--font-size-small);
+    color: var(--font-color-tertiary);
+
+}
+
+.card__value {
+
+    font-weight: var(--font-weight-bold);
+
+}
+
+.card__description {
+
+    font-size: var(--font-size-small);
+    color: var(--font-color-secondary);
+
+}
+
+.card__input {
+
+    width: 100%;
+    min-width: 48px;
+    border: none;
+    font-weight: var(--font-weight-bold);
+    background-color: transparent;
+    cursor: inherit;
+
+}
+
+.card__input::placeholder {
+
+    font-weight: var(--font-weight-normal);
+    color: var(--font-color-tertiary);
+
+}
+
+.card__input:focus {
+
+    outline: none;
+
+}
+
+.card__input--hidden {
+
+    position: absolute;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    inset: 0;
+    opacity: 0;
+
+}
+
+.card__select {
+
+    appearance: none;
+    min-width: 48px;
+    border: none;
+    font-weight: var(--font-weight-bold);
+    background-color: transparent;
+    cursor: inherit;
+
+}
+
+.card__select:focus {
+
+    outline: none;
+
+}
+
+.card__select option {
+
+    background-color: var(--theme-foreground-color);
 
 }

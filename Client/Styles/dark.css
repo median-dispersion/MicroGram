@@ -81,4 +81,23 @@
     --button-critical-background-color-active: var(--color-red-6);
     --button-critical-outline-color: var(--button-critical-foreground-color);
 
+    --toggle-foreground-color-unchecked: var(--font-color-primary);
+    --toggle-background-color-unchecked: var(--color-gray-3);
+    --toggle-foreground-color-checked: var(--font-color-primary);
+    --toggle-background-color-checked: var(--accent-color);
+
+    --radio-border-color-unchecked: var(--color-gray-1);
+    --radio-foreground-color-unchecked: transparent;
+    --radio-background-color-unchecked: transparent;
+    --radio-border-color-checked: transparent;
+    --radio-foreground-color-checked: var(--font-color-primary);
+    --radio-background-color-checked: var(--accent-color);
+
+    --checkbox-border-color-unchecked: var(--color-gray-1);
+    --checkbox-foreground-color-unchecked: transparent;
+    --checkbox-background-color-unchecked: transparent;
+    --checkbox-border-color-checked: transparent;
+    --checkbox-foreground-color-checked: var(--font-color-primary);
+    --checkbox-background-color-checked: var(--accent-color);
+
 }
