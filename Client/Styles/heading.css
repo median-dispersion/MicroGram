@@ -1,0 +1,22 @@
+.heading {
+
+    display: flex;
+    align-items: center;
+    gap: var(--whitespace-normal);
+    padding-top: var(--whitespace-normal);
+    font-weight: var(--font-weight-bold);
+    color: var(--font-color-secondary);
+
+}
+
+.heading__icon {
+
+    flex-shrink: 0;
+
+}
+
+.heading__title {
+
+    flex-grow: 1;
+
+}

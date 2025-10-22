@@ -1,0 +1,13 @@
+.section {
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--whitespace-normal);
+
+}
+
+.section--disabled {
+
+    display: none;
+
+}

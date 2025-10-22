@@ -1,0 +1,51 @@
+.card {
+
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-radius-large);
+    background-color: var(--theme-foreground-color);
+
+}
+
+.card--disabled {
+
+    display: none;
+
+}
+
+.card__item {
+
+    display: flex;
+    align-items: center;
+    gap: var(--whitespace-normal);
+    overflow: auto;
+    min-height: 80px;
+    padding: var(--whitespace-normal);
+    outline: var(--outline-normal);
+    outline-offset: var(--outline-offset-normal);
+    outline-color: transparent;
+    border-top: 1px solid var(--theme-background-color);
+    transition: var(--transition-time-normal);
+
+}
+
+.card__item:first-child {
+
+    border: none;
+    border-top-left-radius: var(--border-radius-large);
+    border-top-right-radius: var(--border-radius-large);
+
+}
+
+.card__item:first-child {
+
+    border-bottom-left-radius: var(--border-radius-large);
+    border-bottom-right-radius: var(--border-radius-large);
+
+}
+
+.card__item--disabled {
+
+    display: none;
+
+}
