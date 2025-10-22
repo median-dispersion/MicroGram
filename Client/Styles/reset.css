@@ -16,3 +16,10 @@ body {
     background-color: var(--theme-background-color);
 
 }
+
+button {
+
+    font: inherit;
+    color: inherit;
+
+}

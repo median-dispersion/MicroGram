@@ -46,8 +46,39 @@
     --accent-color-hover: var(--color-blue-3);
     --accent-color-active: var(--color-blue-5);
 
+    --outline-color-normal: var(--accent-color);
+
     --font-color-primary: rgba(255, 255, 255, 0.9);
     --font-color-secondary: rgba(255, 255, 255, 0.7);
     --font-color-tertiary: rgba(255, 255, 255, 0.5);
+
+    --button-normal-foreground-color: var(--font-color-primary);
+    --button-normal-background-color: var(--color-gray-3);
+    --button-normal-foreground-color-hover: var(--font-color-primary);
+    --button-normal-background-color-hover: var(--color-gray-2);
+    --button-normal-foreground-color-active: var(--font-color-primary);
+    --button-normal-background-color-active: var(--color-gray-4);
+    --button-disabled-foreground-color: var(--font-color-tertiary);
+    --button-disabled-background-color: transparent;
+    --button-flat-foreground-color: var(--font-color-primary);
+    --button-flat-background-color: transparent;
+    --button-flat-foreground-color-hover: var(--font-color-primary);
+    --button-flat-background-color-hover: var(--color-gray-2);
+    --button-flat-foreground-color-active: var(--font-color-primary);
+    --button-flat-background-color-active: var(--color-gray-4);
+    --button-suggested-foreground-color: var(--font-color-primary);
+    --button-suggested-background-color: var(--accent-color);
+    --button-suggested-foreground-color-hover: var(--font-color-primary);
+    --button-suggested-background-color-hover: var(--accent-color-hover);
+    --button-suggested-foreground-color-active: var(--font-color-primary);
+    --button-suggested-background-color-active: var(--accent-color-active);
+    --button-suggested-outline-color: var(--button-suggested-foreground-color);
+    --button-critical-foreground-color: var(--color-red-2);
+    --button-critical-background-color: var(--color-red-7);
+    --button-critical-foreground-color-hover: var(--color-red-1);
+    --button-critical-background-color-hover: var(--color-red-5);
+    --button-critical-foreground-color-active: var(--color-red-1);
+    --button-critical-background-color-active: var(--color-red-6);
+    --button-critical-outline-color: var(--button-critical-foreground-color);
 
 }
