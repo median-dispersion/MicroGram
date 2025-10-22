@@ -40,12 +40,42 @@
 
             <div class="section">
 
-                <div class="card">
+                <form class="card">
 
-                    <div class="card__item"></div>
-                    <div class="card__item"></div>
+                    <div class="card__item">
 
-                </div>
+                        <label class="card__content card__content--interactive">
+
+                            <div class="card__details">
+
+                                <input class="card__input" type="number" min="0" step="0.1" placeholder="Enter your weight..." required>
+
+                            </div>
+
+                        </label>
+
+                        <button class="card__button button button--suggested" type="submit">
+                            <icon-element class="button__icon icon" src="./Icons/Add.svg"></icon-element>
+                        </button>
+
+                    </div>
+
+                    <div class="card__item">
+
+                        <label class="card__content card__content--interactive">
+
+                            <div class="card__details">
+
+                                <span class="card__label">Date & time</span>
+                                <input class="card__input" type="datetime-local" required>
+
+                            </div>
+
+                        </label>
+
+                    </div>
+
+                </form>
 
             </div>
 
