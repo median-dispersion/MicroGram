@@ -1,8 +1,6 @@
 services:
 
-  nginx:
-    image: "nginx:latest"
-    volumes:
-      - "./Client:/usr/share/nginx/html:ro"
+  microgram:
+    build: "."
     ports:
       - "80:80"
