@@ -2,5 +2,7 @@ services:
 
   microgram:
     build: "."
+    volumes:
+      - "./Data:/MicroGram/Server/Database/Data"
     ports:
       - "80:80"
