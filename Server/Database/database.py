@@ -2,10 +2,17 @@ from pathlib import Path
 from contextlib import contextmanager
 import sqlite3
 
-_PATH = Path(__file__).parent
-_SCHEMA = _PATH / "schema.sql"
-_DATA = _PATH / "data.sql"
-_DATABASE = _PATH / "Data/MicroGram.db"
+# Relative file path
+PATH = Path(__file__).parent
+
+# Database schema script path
+SCHEMA = PATH / "schema.sql"
+
+# Database data script path
+DATA = PATH / "data.sql"
+
+# Database path
+DATABASE = PATH / "Data/MicroGram.db"
 
 # =================================================================================================
 # Database connection manager
@@ -14,9 +21,12 @@ _DATABASE = _PATH / "Data/MicroGram.db"
 def connection():
 
     # Connect to the database
-    con = sqlite3.connect(_DATABASE)
+    con = sqlite3.connect(DATABASE)
 
     try:
+
+        # Make rows behave like dictionaries
+        con.row_factory = sqlite3.Row
 
         # Enforce foreign key constraints
         con.execute("PRAGMA foreign_keys = ON;")
@@ -78,14 +88,14 @@ def session():
 def initialize():
 
     # Create database directory
-    _DATABASE.parent.mkdir(parents=True, exist_ok=True)
+    DATABASE.parent.mkdir(parents=True, exist_ok=True)
 
     # Get the database schema
-    with open(_SCHEMA, "r") as file:
+    with open(SCHEMA, "r") as file:
         schema = file.read()
 
     # Get the database data
-    with open(_DATA, "r") as file:
+    with open(DATA, "r") as file:
         data = file.read()
 
     # Start a database session
