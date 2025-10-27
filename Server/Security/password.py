@@ -4,23 +4,23 @@ from argon2 import PasswordHasher
 hasher = PasswordHasher()
 
 # =================================================================================================
-# Hash
+# Hash a password
 # =================================================================================================
-def hash(pwd: str):
+def hash(password: str):
 
     # Return the hashed password
-    return hasher.hash(pwd)
+    return hasher.hash(password)
 
 # =================================================================================================
 # Validation check
 # =================================================================================================
-def valid(pwd: str, hsh: str):
+def valid(password: str, hashed_password: str):
 
     # Try validating the password against the hash
     try:
 
         # Return true if the match
-        return hasher.verify(hsh, pwd)
+        return hasher.verify(hashed_password, password)
 
     # If password could not be validated
     except Exception:
@@ -31,7 +31,7 @@ def valid(pwd: str, hsh: str):
 # =================================================================================================
 # Obsolete check
 # =================================================================================================
-def obsolete(hsh: str):
+def obsolete(hashed_password: str):
 
     # Return if the hash is obsolete and needs rehashing
-    return hasher.check_needs_rehash(hsh)
+    return hasher.check_needs_rehash(hashed_password)

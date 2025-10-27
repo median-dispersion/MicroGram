@@ -5,10 +5,10 @@ import sqlite3
 # Relative file path
 PATH = Path(__file__).parent
 
-# Database schema script path
+# Database schema path
 SCHEMA = PATH / "schema.sql"
 
-# Database data script path
+# Database data path
 DATA = PATH / "data.sql"
 
 # Database path
@@ -21,26 +21,26 @@ DATABASE = PATH / "Data/MicroGram.db"
 def connection():
 
     # Connect to the database
-    con = sqlite3.connect(DATABASE)
+    database_connection = sqlite3.connect(DATABASE)
 
     try:
 
         # Make rows behave like dictionaries
-        con.row_factory = sqlite3.Row
+        database_connection.row_factory = sqlite3.Row
 
         # Enforce foreign key constraints
-        con.execute("PRAGMA foreign_keys = ON;")
+        database_connection.execute("PRAGMA foreign_keys = ON;")
 
         # Yield the database connection
-        yield con
+        yield database_connection
 
         # Commit changes
-        con.commit()
+        database_connection.commit()
 
     except Exception as exception:
 
         # Rollback changes
-        con.rollback()
+        database_connection.rollback()
 
         # Reraise the exception
         raise exception
@@ -48,26 +48,26 @@ def connection():
     finally:
 
         # Close the database connection
-        con.close()
+        database_connection.close()
 
 # =================================================================================================
 # Database cursor manager
 # =================================================================================================
 @contextmanager
-def cursor(con):
+def cursor(database_connection):
 
     # Create a database cursor
-    cur = con.cursor()
+    database_cursor = database_connection.cursor()
 
     try:
 
         # Yield the cursor
-        yield cur
+        yield database_cursor
 
     finally:
 
         # Close the cursor
-        cur.close()
+        database_cursor.close()
 
 # =================================================================================================
 # Database session manager
@@ -75,12 +75,12 @@ def cursor(con):
 @contextmanager
 def session():
 
-    # Connect to the database and get a cursor
-    with connection() as con:
-        with cursor(con) as cur:
+    # Get a database connection and cursor
+    with connection() as database_connection:
+        with cursor(database_connection) as database_cursor:
 
             # Yield the cursor
-            yield cur
+            yield database_cursor
 
 # =================================================================================================
 # Initialize the database
@@ -98,9 +98,9 @@ def initialize():
     with open(DATA, "r") as file:
         data = file.read()
 
-    # Start a database session
-    with session() as ses:
+    # Get a database session
+    with session() as database_session:
 
         # Execute the schema and data scripts
-        ses.executescript(schema)
-        ses.executescript(data)
+        database_session.executescript(schema)
+        database_session.executescript(data)
