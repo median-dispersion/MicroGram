@@ -65,7 +65,10 @@ def user_id(session_uuid: str, session_token: str):
     with database.session() as database_session:
 
         # Select the user session based on the session uuid
-        user_session = database_session.execute("SELECT * FROM `sessions` WHERE `uuid` = ?;", (session_uuid,)).fetchone()
+        user_session = database_session.execute(
+            "SELECT * FROM `sessions` WHERE `uuid` = ?;",
+            (session_uuid,)
+        ).fetchone()
 
         # Check if a user session was selected
         if user_session is not None:
@@ -74,7 +77,10 @@ def user_id(session_uuid: str, session_token: str):
             if datetime.fromisoformat(user_session["expires"]) < datetime.now(timezone.utc):
 
                 # Remove the expired user session
-                database_session.execute("DELETE FROM `sessions` WHERE `id` = ?;", (user_session["id"],))
+                database_session.execute(
+                    "DELETE FROM `sessions` WHERE `id` = ?;",
+                    (user_session["id"],)
+                )
 
             # If the user session is not expired
             else:
@@ -86,7 +92,10 @@ def user_id(session_uuid: str, session_token: str):
                     if password.obsolete(user_session["token"]):
 
                         # Update the user session with the rehashed session token
-                        database_session.execute("UPDATE `sessions` SET `token` = ? WHERE `id` = ?;", (password.hash(session_token), user_session["id"]))
+                        database_session.execute(
+                            "UPDATE `sessions` SET `token` = ? WHERE `id` = ?;",
+                            (password.hash(session_token), user_session["id"])
+                        )
 
                     # Set new dates
                     last_used = datetime.now(timezone.utc)
@@ -97,7 +106,10 @@ def user_id(session_uuid: str, session_token: str):
                     expires = expires.isoformat()
 
                     # Update the user session
-                    database_session.execute("UPDATE `sessions` SET `last_used` = ?, `expires` = ? WHERE `id` = ?;", (last_used, expires, user_session["id"]))
+                    database_session.execute(
+                        "UPDATE `sessions` SET `last_used` = ?, `expires` = ? WHERE `id` = ?;",
+                        (last_used, expires, user_session["id"])
+                    )
 
                     # Return the user ID
                     return user_session["user_id"]
