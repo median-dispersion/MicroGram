@@ -40,40 +40,17 @@
 
             <div class="section">
 
-                <form class="card">
+                <form class="card" id="input">
 
-                    <div class="card__item">
+                    <card-item-element class="card__item" type="number" required name="weight" placeholder="Enter your weight..." min="0" step="any">
 
-                        <label class="card__content card__content--interactive">
-
-                            <div class="card__details">
-
-                                <input class="card__input" type="number" min="0" step="0.1" placeholder="Enter your weight..." required>
-
-                            </div>
-
-                        </label>
-
-                        <button class="card__button button button--suggested" type="submit">
+                        <button class="card__button button button--suggested" slot="append-item">
                             <icon-element class="button__icon icon" src="./Icons/Add.svg"></icon-element>
                         </button>
 
-                    </div>
+                    </card-item-element>
 
-                    <div class="card__item">
-
-                        <label class="card__content card__content--interactive">
-
-                            <div class="card__details">
-
-                                <span class="card__label">Date & time</span>
-                                <input class="card__input" type="datetime-local" required>
-
-                            </div>
-
-                        </label>
-
-                    </div>
+                    <card-item-element class="card__item" type="datetime-local" required name="date" label="Date & time" value="now"></card-item-element>
 
                 </form>
 

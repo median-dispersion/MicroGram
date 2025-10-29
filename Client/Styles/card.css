@@ -56,6 +56,12 @@
 
 }
 
+.card__item--critical {
+
+    outline-color: var(--outline-color-critical);
+
+}
+
 .card__item--disabled {
 
     display: none;

@@ -47,6 +47,7 @@
     --accent-color-active: var(--color-blue-5);
 
     --outline-color-normal: var(--accent-color);
+    --outline-color-critical: var(--color-red-2);
 
     --font-color-primary: rgba(255, 255, 255, 0.9);
     --font-color-secondary: rgba(255, 255, 255, 0.7);
