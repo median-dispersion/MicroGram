@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../Styles/styles.css">
+
+    <script type="module" src="../../Elements/elements.js"></script>
+
+    <link rel="shortcut icon" href="../../Icons/Weight.svg" type="image/svg+xml">
+    <title>Signup | MicroGram</title>
+
+</head>
+
+<body>
+
+    <header-element class="header">
+
+        <div class="header__content content">
+
+            <button class="header__button button button--flat" onclick="history.back();">
+                <icon-element class="button__icon icon" src="../../Icons/BackArrow.svg"></icon-element>
+            </button>
+
+            <span class="header__label">Signup</span>
+
+        </div>
+
+    </header-element>
+
+    <div class="main">
+
+        <div class="main__content content">
+
+            <form class="section" id="signup">
+
+                <div class="card">
+
+                    <card-item-element class="card__item" type="text" required name="name" label="Name"></card-item-element>
+                    <card-item-element class="card__item" type="text" required name="username" label="Username"></card-item-element>
+                    <card-item-element class="card__item" type="password" required name="password" label="Password" minlength="8" maxlength="256"></card-item-element>
+                    <card-item-element class="card__item" type="password" required name="passwordConfirmation" label="Confirm password" minlength="8" maxlength="256"></card-item-element>
+
+                </div>
+
+                <div class="card">
+
+                    <card-item-element class="card__item" type="select" required name="massUnit" label="Mass unit"></card-item-element>
+                    <card-item-element class="card__item" type="select" required name="lengthUnit" label="Length unit"></card-item-element>
+                    <card-item-element class="card__item" type="number" required name="height" label="Height" min="0" step="any"></card-item-element>
+
+                </div>
+
+                <div class="section__group">
+
+                    <button class="section__button button button--suggested" type="submit">
+                        <icon-element class="button__icon icon" src="../../Icons/User.svg"></icon-element>
+                        <span class="button__label">Sign up</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
