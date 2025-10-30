@@ -6,171 +6,66 @@ export default class CardItemBase {
     elements = {};
 
     // ============================================================================================
+    // Constructor
+    // ============================================================================================
+    constructor(item) {
+
+        // Set the item element
+        this.elements.item = item;
+
+    }
+
+    // ============================================================================================
     // Create the content element
     // ============================================================================================
-    createContentElement(type, interactive = false) {
+    createContentElement(type) {
 
-        // Create element
+        // Create the content element
         this.elements.content = document.createElement(type);
-
-        // Add class
         this.elements.content.classList.add("card__content");
 
-        // Check if the content element is supposed to be interactive
-        if (interactive) {
+        // If the content type is a label or link
+        if (type == "label" || type == "a") {
 
-            // Add the interactive class
+            // Add the interactive modifier class
             this.elements.content.classList.add("card__content--interactive");
 
         }
 
-    }
-
-    // ============================================================================================
-    // Create the details element
-    // ============================================================================================
-    createDetailsElement() {
-
-        // Create element
+        // Create the details element
         this.elements.details = document.createElement("div");
-
-        // Add class
         this.elements.details.classList.add("card__details");
-
-        // Append to the appropriate parent element
         this.elements.content.append(this.elements.details);
 
-    }
+        // Get the label
+        const label = this.elements.item.getAttribute("label");
 
-    // ============================================================================================
-    // Create the state element
-    // ============================================================================================
-    createStateElement(type) {
-
-        // Create element
-        this.elements.state = document.createElement("div");
-
-        // Add classes
-        this.elements.state.classList.add("card__state");
-        this.elements.state.classList.add(`card__state--${type}`);
-
-        // Append to the appropriate parent element
-        this.elements.content.append(this.elements.state);
-
-    }
-
-    // ============================================================================================
-    // Create the label element
-    // ============================================================================================
-    createLabelElement(label) {
-
-        // Check if label is set
+        // Check if a label is set
         if (label) {
 
-            // Create element
-            this.elements.label = document.createElement("span");
-
-            // Add class
+            // Create the label element
+            this.elements.label = document.createElement("div");
             this.elements.label.classList.add("card__label");
-
-            // Set label value
             this.elements.label.textContent = label;
-
-            // Append to the appropriate parent element
             this.elements.details.append(this.elements.label);
 
         }
 
-    }
+        // Create the value element
+        this.elements.value = document.createElement("div");
+        this.elements.value.classList.add("card__value");
+        this.elements.details.append(this.elements.value);
 
-    // ============================================================================================
-    // Create the value element
-    // ============================================================================================
-    createValueElement(value) {
+        // Get the description
+        const description = this.elements.item.getAttribute("description");
 
-        // Check if value is set
-        if (value) {
-
-            // Create element
-            this.elements.value = document.createElement("span");
-
-            // Add class
-            this.elements.value.classList.add("card__value");
-
-            // Set value value
-            this.elements.value.textContent = value;
-
-            // Append to the appropriate parent element
-            this.elements.details.append(this.elements.value);
-
-        }
-
-    }
-
-    // ============================================================================================
-    // Create the input element
-    // ============================================================================================
-    createInputElement(type, hidden = false) {
-
-        // Create element
-        this.elements.input = document.createElement("input");
-
-        // Add class
-        this.elements.input.classList.add("card__input");
-
-        // Set the input type
-        this.elements.input.type = type;
-
-        // Check if the input is supposed to be hidden
-        if (hidden) {
-
-            // Add the hidden class
-            this.elements.input.classList.add("card__input--hidden");
-
-        }
-
-        // Add the validity check to the input element
-        this.addValidityCheck(this.elements.input);
-
-    }
-
-    // ============================================================================================
-    // Create the select element
-    // ============================================================================================
-    createSelectElement() {
-
-        // Create element
-        this.elements.select = document.createElement("select");
-
-        // Add class
-        this.elements.select.classList.add("card__select");
-
-        // Add the validity check to the input element
-        this.addValidityCheck(this.elements.select);
-
-        // Append to the appropriate parent element
-        this.elements.details.append(this.elements.select);
-
-    }
-
-    // ============================================================================================
-    // Create the description element
-    // ============================================================================================
-    createDescriptionElement(description) {
-
-        // Check if the description is set
+        // Check if a description is set
         if (description) {
 
-            // Create element
-            this.elements.description = document.createElement("span");
-
-            // Add class
+            // Create a description element
+            this.elements.description = document.createElement("div");
             this.elements.description.classList.add("card__description");
-
-            // Set the description value
             this.elements.description.textContent = description;
-
-            // Append to the appropriate parent element
             this.elements.details.append(this.elements.description);
 
         }
@@ -178,9 +73,135 @@ export default class CardItemBase {
     }
 
     // ============================================================================================
+    // Create the state element
+    // ============================================================================================
+    createStateElement(type, attributes) {
+
+        // Create the state element
+        this.elements.state = document.createElement("div");
+        this.elements.state.classList.add("card__state");
+        this.elements.state.classList.add(`card__state--${type}`);
+        this.elements.content.append(this.elements.state);
+
+        // Create the input element
+        this.elements.input = document.createElement("input");
+        this.elements.input.classList.add("card__input");
+        this.elements.input.classList.add("card__input--hidden");
+        this.elements.input.type = type == "toggle" ? "checkbox" : type;
+        this.elements.state.append(this.elements.input);
+
+        // Move the attributes
+        this.#moveAttributes(attributes, this.elements.item, this.elements.input);
+
+        // Add input validation
+        this.#validateInput(this.elements.input);
+
+    }
+
+    // ============================================================================================
+    // Create the input element
+    // ============================================================================================
+    createInputElement(type, attributes) {
+
+        // Create the input element
+        this.elements.input = document.createElement("input");
+        this.elements.input.classList.add("card__input");
+        this.elements.input.type = type;
+        this.elements.value.append(this.elements.input);
+
+        // Move the attributes
+        this.#moveAttributes(attributes, this.elements.item, this.elements.input);
+
+        // Add input validation
+        this.#validateInput(this.elements.input);
+
+    }
+
+    // ============================================================================================
+    // Create the unit element
+    // ============================================================================================
+    createUnitElement() {
+
+        // Create the unit element
+        this.elements.unit = document.createElement("div");
+        this.elements.unit.classList.add("card__unit");
+        this.elements.value.prepend(this.elements.unit);
+
+        // Create the unit value element
+        this.elements.unit_value = document.createElement("span");
+        this.elements.unit_value.classList.add("card__unit--value");
+        this.elements.unit.append(this.elements.unit_value);
+
+        // Create the unit symbol element
+        this.elements.unit_symbol = document.createElement("span");
+        this.elements.unit_symbol.classList.add("card__unit--symbol");
+        this.elements.unit.append(this.elements.unit_symbol);
+
+        // Move the unit attribute
+        this.#moveAttributes(["unit"], this.elements.item, this.elements.unit);
+
+        // Add a input event listener to the input element
+        this.elements.input.addEventListener("input", (event) => {
+
+            // Get the symbol
+            const symbol = this.elements.unit.getAttribute("unit");
+
+            // Check if the input element contains a value and symbol
+            if (event.target.value && symbol) {
+
+                // Set the unit value and symbol
+                this.elements.unit_value.textContent = event.target.value;
+                this.elements.unit_symbol.textContent = ` ${symbol}`;
+
+            // If the input element contains no value
+            } else {
+
+                // Clear the unit value and symbol
+                this.elements.unit_value.textContent = "";
+                this.elements.unit_symbol.textContent = "";
+
+            }
+
+        });
+
+    }
+
+    // ============================================================================================
+    // Create the select element
+    // ============================================================================================
+    createSelectElement(attributes) {
+
+        // Create the select element
+        this.elements.select = document.createElement("select");
+        this.elements.select.classList.add("card__select");
+        this.elements.value.append(this.elements.select);
+
+        // For every option element
+        this.elements.item.querySelectorAll("option").forEach(option => {
+
+            // Move the option element to the select element
+            this.elements.select.append(option);
+
+        });
+
+        // Move the attributes
+        this.#moveAttributes(attributes, this.elements.item, this.elements.select);
+
+        // Add input validation
+        this.#validateInput(this.elements.select);
+
+        // Show the dropdown menu on focus
+        this.elements.select.addEventListener("focus", this.elements.select.showPicker);
+
+    }
+
+    // --------------------------------------------------------------------------------------------
+    // Private
+
+    // ============================================================================================
     // Move attributes
     // ============================================================================================
-    moveAttributes(attributes, source, target) {
+    #moveAttributes(attributes, source, target) {
 
         // For every attribute in the list of attributes
         attributes.forEach(attribute => {
@@ -204,9 +225,9 @@ export default class CardItemBase {
     }
 
     // ============================================================================================
-    // Add a validity check
+    // Input validation
     // ============================================================================================
-    addValidityCheck(target) {
+    #validateInput(target) {
 
         // Add a blur event listener to the target element
         target.addEventListener("blur", () => {

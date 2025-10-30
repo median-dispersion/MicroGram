@@ -27,32 +27,26 @@ export default class CardItemElement extends HTMLElement {
             // Check if a type is set
             if (type) {
 
-                // Get all slot elements
-                const slots = this.querySelectorAll("[slot]");
-
                 // Item instance
                 let instance;
 
                 // Depending on the item type set the item instance
                 switch (type) {
 
-                    case "value": { instance = new CardItemValue(); break; }
-                    case "text": { instance = new CardItemText(); break; }
-                    case "password": { instance = new CardItemPassword(); break; }
-                    case "number": { instance = new CardItemNumber(); break; }
-                    case "datetime-local": { instance = new CardItemDateTimeLocal(); break; }
-                    case "toggle": { instance = new CardItemToggle(); break; }
-                    case "radio": { instance = new CardItemRadio(); break; }
-                    case "checkbox": { instance = new CardItemCheckbox(); break; }
-                    case "select": { instance = new CardItemSelect(); break; }
+                    case "value": { instance = new CardItemValue(this); break; }
+                    case "text": { instance = new CardItemText(this); break; }
+                    case "password": { instance = new CardItemPassword(this); break; }
+                    case "number": { instance = new CardItemNumber(this); break; }
+                    case "datetime-local": { instance = new CardItemDateTimeLocal(this); break; }
+                    case "toggle": { instance = new CardItemToggle(this); break; }
+                    case "radio": { instance = new CardItemRadio(this); break; }
+                    case "checkbox": { instance = new CardItemCheckbox(this); break; }
+                    case "select": { instance = new CardItemSelect(this); break; }
 
                 }
 
-                // Create the item instance
-                instance.create(this);
-
                 // For each slot element
-                slots.forEach(element => {
+                this.querySelectorAll("[slot]").forEach(element => {
 
                     // Move the slot element to the appropriate slot position
                     switch (element.slot) {

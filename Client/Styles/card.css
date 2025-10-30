@@ -240,6 +240,7 @@
 
 .card__value {
 
+    position: relative;
     font-weight: var(--font-weight-bold);
 
 }
@@ -251,8 +252,30 @@
 
 }
 
+.card__unit {
+
+    overflow: hidden;
+    position: absolute;
+    inset: 0;
+
+}
+
+.card__unit--value {
+
+    font-weight: var(--font-weight-bold);
+    opacity: 0;
+
+}
+
+.card__unit--symbol {
+
+    font-weight: var(--font-weight-normal);
+
+}
+
 .card__input {
 
+    position: relative;
     width: 100%;
     min-width: 48px;
     border: none;
@@ -289,6 +312,8 @@
 .card__select {
 
     appearance: none;
+    position: relative;
+    width: 100%;
     min-width: 48px;
     border: none;
     font-weight: var(--font-weight-bold);

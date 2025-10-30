@@ -2,22 +2,32 @@ import CardItemBase from "./CardItemBase.js";
 
 export default class CardItemValue extends CardItemBase {
 
-    // ============================================================================================
-    // Create value item
-    // ============================================================================================
-    create(item) {
+    // --------------------------------------------------------------------------------------------
+    // Public
 
-        // Set the item element
-        this.elements.item = item;
+    // ============================================================================================
+    // Constructor
+    // ============================================================================================
+    constructor(item) {
 
-        // Create an append required elements
+        // Call the parent constructor
+        super(item);
+
+        // Create item structure
         this.createContentElement("div");
-        this.createDetailsElement();
-        this.createLabelElement(this.elements.item.getAttribute("label"));
-        this.createValueElement(this.elements.item.getAttribute("value"));
-        this.createDescriptionElement(this.elements.item.getAttribute("description"));
 
-        // Append item content
+        // Get the value
+        const value = this.elements.item.getAttribute("value");
+
+        // Check if a value is set
+        if (value) {
+
+            // Apply the set value
+            this.elements.value.textContent = value;
+
+        }
+
+        // Append the item structure
         this.elements.item.append(this.elements.content);
 
     }

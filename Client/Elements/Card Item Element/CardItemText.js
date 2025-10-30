@@ -2,45 +2,37 @@ import CardItemBase from "./CardItemBase.js";
 
 export default class CardItemText extends CardItemBase {
 
+    // --------------------------------------------------------------------------------------------
+    // Public
+
     // ============================================================================================
-    // Create text item
+    // Constructor
     // ============================================================================================
-    create(item) {
+    constructor(item) {
 
-        // Set the item element
-        this.elements.item = item;
+        // Call the parent constructor
+        super(item);
 
-        // Create item structure
-        this.createContentElement("label", true);
-        this.createDetailsElement();
-        this.createLabelElement(this.elements.item.getAttribute("label"));
-
-        // Create input element
-        this.createInputElement("text");
-
-        // List of attributes to move from the item element to the input element
+        // List of attributes to move to the input element
         const attributes = [
 
+            "type",
+            "required",
             "name",
             "value",
             "placeholder",
-            "required",
             "minlength",
             "maxlength",
             "pattern"
 
         ];
 
-        // Move attributes from the item element to the input element
-        this.moveAttributes(attributes, this.elements.item, this.elements.input);
+        // Create item structure
+        this.createContentElement("label");
+        this.createInputElement("text", attributes);
+        this.createUnitElement();
 
-        // Append the input element to the details element
-        this.elements.details.append(this.elements.input);
-
-        // Create a description element
-        this.createDescriptionElement(this.elements.item.getAttribute("description"));
-
-        // Append item content
+        // Append the item structure
         this.elements.item.append(this.elements.content);
 
     }
