@@ -1,0 +1,17 @@
+.actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--whitespace-normal);
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .actions__button {
+
+        flex: 1 1 200px;
+
+    }
+
+}

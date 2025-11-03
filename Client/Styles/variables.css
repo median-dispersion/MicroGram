@@ -26,6 +26,11 @@
     --transition-time-normal: 100ms;
     --transition-time-fast: 50ms;
 
+    --blur-strong: 64px;
+    --blur-normal: 32px;
+    --blur-light: 16px;
+
     --header-z-index: 100;
+    --dialog-z-index: 200;
 
 }

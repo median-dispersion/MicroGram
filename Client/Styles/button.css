@@ -3,7 +3,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--whitespace-normal);
     min-width: 48px;
     height: 48px;
     padding: var(--whitespace-normal);
@@ -37,6 +36,13 @@
 .button:focus-visible {
 
     outline-color: var(--outline-color-normal);
+
+}
+
+.button--square {
+
+    width: 48px;
+    height: 48px;
 
 }
 
@@ -147,6 +153,7 @@
 .button__label {
 
     overflow: hidden;
+    padding: 0 var(--whitespace-normal);
     white-space: nowrap;
     text-overflow: ellipsis;
 
@@ -155,8 +162,5 @@
 .button__icon {
 
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-    transform: scale(1.5);
 
 }
