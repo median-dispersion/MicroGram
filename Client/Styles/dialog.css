@@ -1,5 +1,6 @@
 .dialog {
 
+    display: none;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -7,15 +8,28 @@
     padding: var(--whitespace-normal);
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(var(--blur-normal));
-    animation: dialog var(--transition-time-slow) ease forwards;
+    animation: dialog--open var(--transition-time-slow) ease forwards;
     z-index: var(--dialog-z-index);
 
 }
 
-@keyframes dialog {
+@keyframes dialog--open {
 
     0% { opacity: 0; }
     100% { opacity: 1; }
+
+}
+
+.dialog--closed {
+
+    animation: dialog--closed var(--transition-time-slow) ease forwards;
+
+}
+
+@keyframes dialog--closed {
+
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 
 }
 
