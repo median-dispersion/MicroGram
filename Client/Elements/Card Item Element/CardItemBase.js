@@ -137,20 +137,21 @@ export default class CardItemBase {
         this.elements.unit_symbol.classList.add("card__unit--symbol");
         this.elements.unit.append(this.elements.unit_symbol);
 
-        // Move the unit attribute
-        this.#moveAttributes(["unit"], this.elements.item, this.elements.unit);
+        // Move the symbol attribute
+        this.#moveAttributes(["symbol"], this.elements.item, this.elements.unit);
 
-        // Add a input event listener to the input element
-        this.elements.input.addEventListener("input", (event) => {
+        // Event handler for changes on the unit element
+        const changeUnit = () => {
 
-            // Get the symbol
-            const symbol = this.elements.unit.getAttribute("unit");
+            // Get the value and symbol
+            const value = this.elements.input.value;
+            const symbol = this.elements.unit.getAttribute("symbol");
 
             // Check if the input element contains a value and symbol
-            if (event.target.value && symbol) {
+            if (value && symbol) {
 
                 // Set the unit value and symbol
-                this.elements.unit_value.textContent = event.target.value;
+                this.elements.unit_value.textContent = value;
                 this.elements.unit_symbol.textContent = ` ${symbol}`;
 
             // If the input element contains no value
@@ -162,7 +163,13 @@ export default class CardItemBase {
 
             }
 
-        });
+        };
+
+        // Add a input event listener to the input element
+        this.elements.input.addEventListener("input", changeUnit);
+
+        // Add observer for attribute changes
+        new MutationObserver(changeUnit).observe(this.elements.unit, {attributes: true, attributeFilter: ["symbol"]});
 
     }
 
@@ -253,6 +260,19 @@ export default class CardItemBase {
                     this.elements.item.classList.add("card__item--critical");
 
                 }
+
+            }
+
+        });
+
+        // Add a invalid event listener to the target element
+        target.addEventListener("invalid", () => {
+
+            // Check if the item element does not contain the critical modifier class
+            if (!this.elements.item.classList.contains("card__item--critical")) {
+
+                // Add the critical modifier class
+                this.elements.item.classList.add("card__item--critical");
 
             }
 

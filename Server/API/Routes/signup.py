@@ -17,6 +17,9 @@ class SignUp(BaseModel):
     name: str
     username: str
     password: str
+    massUnit: uuid.UUID
+    lengthUnit: uuid.UUID
+    height: float
 
 # =================================================================================================
 # Signup
@@ -34,10 +37,37 @@ def signup(data: SignUp):
     # Get a database session
     with database.session() as database_session:
 
+        # Get the mass unit and type
+        mass_unit = database_session.execute(
+            "SELECT `units`.`id` AS `unit_id`, `units`.`base` AS `unit_base`, `unit_types`.`id` AS `type_id` FROM `units` JOIN `unit_types` ON `units`.`unit_type_id` = `unit_types`.`id` WHERE `unit_types`.`id` = 1 AND `units`.`uuid` = ?;",
+            (str(data.massUnit),)
+        ).fetchone()
+
+        # Check if no mass unit was selected
+        if mass_unit is None:
+
+            # Return a 404 response
+            return JSONResponse(status_code=404, content={"message": "Mass unit not found!"})
+
+        # Get the length unit and type
+        length_unit = database_session.execute(
+            "SELECT `units`.`id` AS `unit_id`, `units`.`base` AS `unit_base`, `unit_types`.`id` AS `type_id` FROM `units` JOIN `unit_types` ON `units`.`unit_type_id` = `unit_types`.`id` WHERE `unit_types`.`id` = 2 AND `units`.`uuid` = ?;",
+            (str(data.lengthUnit),)
+        ).fetchone()
+
+        # Check if no length unit was selected
+        if length_unit is None:
+
+            # Return a 404 response
+            return JSONResponse(status_code=404, content={"message": "Length unit not found!"})
+
+        # Set the unique UUID flag to false
+        unique_uuid = False
+
         # Loop until a user is inserted
         # It might fail because the generated user uuid was not unique
         # This is very unlikely but not impossible
-        while database_session.rowcount < 1:
+        while not unique_uuid:
 
             # Generate a user uuid
             user_uuid = str(uuid.uuid4())
@@ -51,6 +81,9 @@ def signup(data: SignUp):
                     (user_uuid, data.name, data.username, data.password, created)
                 )
 
+                # Set the unique UUID flag to true
+                unique_uuid = True
+
             # If a uniqueness constraint fails
             except sqlite3.IntegrityError as exception:
 
@@ -62,6 +95,36 @@ def signup(data: SignUp):
 
         # Get the user ID
         user_id = database_session.lastrowid
+
+        # Insert the user units
+        database_session.execute(
+            "INSERT INTO `user_units` (`user_id`, `unit_type_id`, `unit_id`) VALUES (?, ?, ?), (?, ?, ?);",
+            (user_id, mass_unit["type_id"], mass_unit["unit_id"], user_id, length_unit["type_id"], length_unit["unit_id"])
+        )
+
+        # Set the unique UUID flag to false
+        unique_uuid = False
+
+        # Loop unit the UUID is unique
+        while not unique_uuid:
+
+            # Generate a UUID for the user height entry
+            height_uuid = str(uuid.uuid4())
+
+            # Try inserting the user height
+            try:
+
+                # Insert user height
+                database_session.execute(
+                    "INSERT INTO `user_heights` (`uuid`, `user_id`, `height_base`, `height`, `unit_id`) VALUES (?, ?, ?, ?, ?);",
+                    (height_uuid, user_id, data.height * length_unit["unit_base"], data.height, length_unit["unit_id"])
+                )
+
+                # Set the unique UUID flag to true
+                unique_uuid = True
+
+            # If the uniqueness constraint fails do nothing
+            except sqlite3.IntegrityError: pass
 
     # Create a new user session
     user_session = session.create(user_id)
