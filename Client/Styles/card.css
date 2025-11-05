@@ -52,12 +52,14 @@
 
 .card__item:has(.card__content--interactive:focus-within) {
 
+    outline-offset: var(--outline-offset-normal);
     outline-color: var(--outline-color-normal);
 
 }
 
 .card__item--critical {
 
+    outline-offset: var(--outline-offset-large);
     outline-color: var(--outline-color-critical);
 
 }

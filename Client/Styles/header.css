@@ -2,7 +2,7 @@
 
     display: block;
     position: sticky;
-    padding: var(--whitespace-normal);
+    padding: var(--whitespace-small) var(--whitespace-normal);
     inset: 0;
     border-bottom: 1px solid var(--theme-background-color);
     background-color: var(--theme-background-color);
@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     gap: var(--whitespace-normal);
+    min-height: 48px;
 
 }
 
