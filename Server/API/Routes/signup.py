@@ -133,8 +133,8 @@ def signup(data: SignUp):
     response = JSONResponse(status_code=200, content={"message": "Successfully signed up!"})
 
     # Set the user session tokens
-    response.set_cookie(key="session_uuid", value=user_session["uuid"], httponly=True, secure=False, samesite="lax")
-    response.set_cookie(key="session_token", value=user_session["token"], httponly=True, secure=False, samesite="lax")
+    response.set_cookie(key="session_uuid", value=user_session["uuid"], httponly=True, secure=False, samesite="lax", max_age=31536000)
+    response.set_cookie(key="session_token", value=user_session["token"], httponly=True, secure=False, samesite="lax", max_age=31536000)
 
     # Return a 200 response with session cookies
     return response

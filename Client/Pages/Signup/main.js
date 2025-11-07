@@ -1,4 +1,23 @@
-import dialog from "../../Modules/Dialog.js";
+import request from "../../Modules/request.js";
+import toast from "../../Modules/Toast.js";
+
+// ================================================================================================
+// Get the login status
+// ================================================================================================
+async function getLoginStatus() {
+
+    // Test the login state by requesting the name of the user
+    const response = await request("/API/User/Name", {}, false);
+
+    // If the user is already logged in
+    if (response.ok) {
+
+        // Go back to the main page
+        window.location.href = "/";
+
+    }
+
+}
 
 // ================================================================================================
 // Set the height unit symbol
@@ -6,7 +25,7 @@ import dialog from "../../Modules/Dialog.js";
 async function getHeightSymbol(uuid) {
 
     // Get the unit based on the UUID
-    const response = await fetch(`/API/Units/${uuid}`);
+    const response = await request(`/API/Units/${uuid}`);
 
     // Parse the response as JSON
     const unit = await response.json();
@@ -25,7 +44,7 @@ async function getHeightSymbol(uuid) {
 async function getMassUnits() {
 
     // Get all mass units
-    const response = await fetch("/API/Units/Mass");
+    const response = await request("/API/Units/Mass");
 
     // Parse the response as JSON
     const units = await response.json();
@@ -56,7 +75,7 @@ async function getMassUnits() {
 async function getLengthUnits() {
 
     // Get all length units
-    const response = await fetch("/API/Units/Length");
+    const response = await request("/API/Units/Length");
 
     // Parse the response as JSON
     const units = await response.json();
@@ -134,7 +153,7 @@ function handleSignupSubmit() {
         const formData = Object.fromEntries(new FormData(signup).entries());
 
         // Post signup data
-        const response = await fetch("/API/Signup", {
+        const response = await request("/API/Signup", {
 
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -150,28 +169,47 @@ function handleSignupSubmit() {
 
             })
 
-        });
+        }, false);
 
-        // Check if the signup was successful
-        if (response.ok) {
+        // Check if the response is not 200 OK
+        if (!response.ok) {
+
+            // Check if the response is 409 Conflict
+            if (response.status == 409) {
+
+                // Display a toast notification
+                toast.open({
+
+                    type: "warning",
+                    label: "Failed to sign up!",
+                    text: "The username you chose is already in use.",
+                    durationSeconds: 10
+
+                });
+
+            // If the response is a different error
+            } else {
+
+                // Get the response data
+                const responseData = await response.json();
+
+                // Display a toast notification
+                toast.open({
+
+                    type: "error",
+                    label: "Failed to sign up!",
+                    text: `An error occurred while signing up. Response status: "${response.status}", error message: "${responseData.message}".`,
+                    durationSeconds: 10
+
+                });
+
+            }
+
+        // If the response was 200 OK
+        } else {
 
             // Go back to the main page
             window.location.href = "/";
-
-        // If the signup failed
-        } else {
-
-            // Get the response data
-            const responseData = await response.json();
-
-            // Show a dialog message
-            dialog.open("Failed to sign up!", responseData.message, [{
-
-                label: "OK",
-                classes: ["button--normal"],
-                action: dialog.close
-
-            }]);
 
         }
 
@@ -184,6 +222,7 @@ function handleSignupSubmit() {
 // ================================================================================================
 document.addEventListener("DOMContentLoaded", () => {
 
+    getLoginStatus();
     getMassUnits();
     getLengthUnits();
     handlePasswordConfirmation();
