@@ -7,6 +7,7 @@ import CardItemToggle from "./CardItemToggle.js";
 import CardItemRadio from "./CardItemRadio.js";
 import CardItemCheckbox from "./CardItemCheckbox.js";
 import CardItemSelect from "./CardItemSelect.js";
+import CardItemLink from "./CardItemLink.js";
 
 export default class CardItemElement extends HTMLElement {
 
@@ -42,6 +43,7 @@ export default class CardItemElement extends HTMLElement {
                     case "radio": { instance = new CardItemRadio(this); break; }
                     case "checkbox": { instance = new CardItemCheckbox(this); break; }
                     case "select": { instance = new CardItemSelect(this); break; }
+                    case "link": { instance = new CardItemLink(this); break; }
 
                 }
 

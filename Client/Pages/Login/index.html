@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../Styles/styles.css">
+
+    <script type="module" src="../../Elements/elements.js"></script>
+    <script type="module" src="./main.js"></script>
+
+    <link rel="shortcut icon" href="../../Icons/Weight.svg" type="image/svg+xml">
+    <title>Login | MicroGram</title>
+
+</head>
+
+<body>
+
+    <header-element class="header">
+
+        <div class="header__content content">
+
+            <span class="header__label">Login</span>
+
+        </div>
+
+    </header-element>
+
+    <div class="main">
+
+        <div class="main__content content">
+
+            <form class="section" id="login">
+
+                <div class="card">
+
+                    <card-item-element class="card__item" type="text" required name="username" label="Username"></card-item-element>
+                    <card-item-element class="card__item" type="password" required name="password" label="Password"></card-item-element>
+
+                    <div class="card__item actions">
+
+                        <button class="actions__button button button--suggested" type="submit">
+                            <span class="button__label">Log in</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <div class="section">
+
+                <div class="heading">
+                    <span class="heading__label">New here?</span>
+                </div>
+
+                <div class="card">
+
+                    <card-item-element class="card__item" type="link" value="Signup" description="Create a new account!" href="../Signup">
+
+                        <icon-element class="card__icon icon" slot="prepend-content" src="../../Icons/User.svg"></icon-element>
+                        <icon-element class="card__icon icon" slot="append-content" src="../../Icons/ArrowRightSmall.svg"></icon-element>
+
+                    </card-item-element>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
