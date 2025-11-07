@@ -101,4 +101,25 @@
     --checkbox-foreground-color-checked: var(--font-color-primary);
     --checkbox-background-color-checked: var(--accent-color);
 
+    --toast-normal-border-color: var(--color-gray-1);
+    --toast-normal-foreground-color: var(--font-color-primary);
+    --toast-normal-background-color: var(--theme-foreground-color);
+    --toast-normal-background-color-hover: var(--theme-foreground-color-hover);
+    --toast-info-border-color: var(--color-blue-2);
+    --toast-info-foreground-color: var(--color-blue-1);
+    --toast-info-background-color: var(--color-blue-7);
+    --toast-info-background-color-hover: var(--color-blue-6);
+    --toast-success-border-color: var(--color-green-2);
+    --toast-success-foreground-color: var(--color-green-1);
+    --toast-success-background-color: var(--color-green-7);
+    --toast-success-background-color-hover: var(--color-green-6);
+    --toast-warning-border-color: var(--color-yellow-2);
+    --toast-warning-foreground-color: var(--color-yellow-1);
+    --toast-warning-background-color: var(--color-yellow-7);
+    --toast-warning-background-color-hover: var(--color-yellow-6);
+    --toast-error-border-color: var(--color-red-2);
+    --toast-error-foreground-color: var(--color-red-1);
+    --toast-error-background-color: var(--color-red-7);
+    --toast-error-background-color-hover: var(--color-red-6);
+
 }
